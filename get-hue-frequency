@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+
+use POSIX;
+
+open(IN, "colors.lch");
+while (<IN>) {
+	$seq++;
+	if ($seq % 100000 == 0) {
+		printf STDERR ("%f\r", $seq / 3405994 * 100);
+	}
+
+	($l, $c, $h, $r, $g, $b) = split(/ /);
+	$h = floor($h / .01) * .01;
+
+	$sum{$h}++;
+}
+
+for $h (sort { $a <=> $b } keys(%sum)) {
+	print "$h $sum{$h}\n";
+}
