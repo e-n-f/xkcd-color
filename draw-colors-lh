@@ -1,0 +1,34 @@
+#!/usr/bin/perl
+
+print "0 0 0 setrgbcolor 0 0 moveto 600 0 lineto 600 600 lineto 0 600 lineto 0 0 fill stroke\n";
+
+$pi = 4 * atan2(1, 1);
+
+while (<>) {
+	($l, $c, $h) = split(/ /);
+	$color = "";
+
+	if (/green/i)  { $color = ".4 .8 .4" }
+	if (/blue/i)   { $color = "0 0 1" }
+	if (/purple/i) { $color = ".58 .44 .86" }
+	if (/pink/i)   { $color = "1 .75 .8" }
+	if (/brown/i)   { $color = ".65 .16 .16" }
+	if (/red/i)    { $color = "1 0 0" }
+	if (/yellow/i) { $color = "1 1 0" }
+	if (/orange/i) { $color = "1 .5 0" }
+	#if (/teal/i)   { $color = "0 .5 .5" }  # ???
+	#if (/magenta/i) { $color = "1 0 1" }
+	#if (/violet/i) { $color = "1 .5 1" }
+
+#	if (/gray/i)   { $color = "128 128 128" }
+#	if (/grey/i)   { $color = "128 128 128" }
+
+	if ($color ne "") {
+		if ($color ne $ocolor) {
+			print "$color setrgbcolor ";
+			$ocolor = $color;
+		}
+
+		printf("%.6f %.6f .3 0 360 arc fill\n", $l * 300 / 100, $c * 300 / 100);
+	}
+}
